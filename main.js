@@ -1,14 +1,15 @@
-const http = require('http');
+// 引入express模块
+const express = require('express');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+// 创建一个express应用
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+// 定义一个路由，处理根URL的GET请求
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+// 让应用监听3000端口
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });
