@@ -6,7 +6,7 @@ const app = express();
 
 // 定义一个路由，处理根URL的GET请求
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  res.send('Hello, Express!');
 });
 
 // 让应用监听3000端口
