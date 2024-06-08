@@ -3,10 +3,6 @@ const fs = require('fs');
 
 const filePath = './data.json';
 
-if (!fs.existsSync(filePath)) {
-  fs.writeFileSync(filePath, '');
-}
-
 const app = express();
 
 app.use(express.json());
@@ -14,6 +10,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/', (req, res) => {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, '');
+  }
   let preData = fs.readFileSync(filePath, 'utf8');
   if (preData === '') preData = '[]';
   preData = JSON.parse(preData);
