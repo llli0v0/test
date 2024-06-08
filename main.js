@@ -16,7 +16,7 @@ app.post('/', (req, res) => {
   let preData = fs.readFileSync(filePath, 'utf8');
   if (preData === '') preData = '[]';
   preData = JSON.parse(preData);
-  preData = preData.concat(req.body);
+  preData = preData.concat(req.body.actions);
   fs.writeFileSync(filePath, JSON.stringify(preData));
   res.send('Hello, Express!');
 });
