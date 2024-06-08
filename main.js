@@ -1,15 +1,27 @@
-// 引入express模块
 const express = require('express');
+const fs = require('fs');
 
-// 创建一个express应用
+const filePath = './data.json';
+
+if (!fs.existsSync(filePath)) {
+  fs.writeFileSync(filePath, '');
+}
+
 const app = express();
 
-// 定义一个路由，处理根URL的GET请求
-app.get('/', (req, res) => {
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/', (req, res) => {
+  let preData = fs.readFileSync(filePath, 'utf8');
+  if (preData === '') preData = '[]';
+  preData = JSON.parse(preData);
+  preData = preData.concat(req.body);
+  fs.writeFileSync(filePath, JSON.stringify(preData));
   res.send('Hello, Express!');
 });
 
-// 让应用监听3000端口
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
