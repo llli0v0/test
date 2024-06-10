@@ -21,6 +21,14 @@ app.post('/', (req, res) => {
   res.send('Hello, Express!');
 });
 
+app.get('/', (req, res) => {
+  if (fs.existsSync(filePath)) {
+    let data = JSON.parse(fs.readFileSync(filePath));
+    return res.send(data);
+  }
+  res.send(null);
+});
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
